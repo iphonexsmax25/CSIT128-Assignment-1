@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+    <html =lang="en">
+        <head>
+            <title>The three stooges</title> 
+            <style>
+              table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: center;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 10px;
+            }
+
+            th {
+                background-color: #b7c2cc;
+                font-weight: bold;
+            }
+               body {
+            font-family: Arial;
+        }
+
+            h2 {
+                text-align: left;
+            }
+
+            ul {
+                list-style-type: disc;
+                padding-left: 20px;
+            }
+
+            img {
+                vertical-align: middle;
+                margin-right: 20px;
+            }
+
+            pre {
+                display: inline-block;
+                vertical-align: middle;
+                background-color: #f4f4f4;
+                padding: 10px;
+            }
+             .content {
+            margin-left: 50px;
+            max-width: 760px;
+        }
+
+            .advisor-table {
+                margin-top: 10px;
+                border: 1px solid black;
+                width: 320px;
+            }
+
+            .advisor-table td {
+                border: 1px solid black;
+                padding: 3px;
+                vertical-align: top;
+                width: 160px;
+                font-size: 14px;
+            }
+            </style>
+         
+        </head>
+        <body>
+                    <table>
+            <tr> 
+                <th colspan="3">CSIT128: Assignment 1 </th>
+                <th>Group G5T05</th>
+            </tr>
+            <tr>
+                <td rowspan="3">Student Number /<br>Name / Email</td>
+                <td>1137906</td>
+                <td>Issac Lim King Ming</td>
+                <td>ikml942@uowmail.edu.au</td>
+            </tr>
+            <tr>
+                <td>1348243</td>
+                <td>George Lee Jia Yun</td>
+                <td>gjyl328@uowmail.edu.au</td>
+            </tr>
+            <tr>
+                <td>1443094</td>
+                <td>Hans Christian Hardja</td>
+                <td>hch200@uowmail.edu.au</td>
+            </tr>
+        </table>
+        <h1>Part 2: Hello world in different languages</h1>
+
+        <ul>
+            <li><a href="#cpp">C++</a></li>
+            <li><a href="#csharp">C#</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#html">HTML</a></li>
+        </ul>
+
+        <hr>
+
+        <h3 id="cpp">C++</h3>
+        <img src="CPP.jpg" alt="C++ image" width="150">
+        <pre>
+            #include &lt;iostream&gt;
+
+            void main(  ) {
+                cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+                return 0;
+            }
+        </pre>
+
+        <hr>
+        <h3 id="csharp">C#</h3>
+        <img src="CS.png" alt="C# image" width="150">
+        <pre>
+            using System;
+
+            class Program 
+            {
+                static void Main() 
+                {
+                    Console.WriteLine("Hello, World!");
+                }
+            }
+        </pre>
+
+        <hr>
+        <h3 id="python">Python</h3>
+        <img src="python.jpg" alt="Python image" width="150">
+        <pre>
+            # Hello World Program in Python
+            print("Hello World!")
+        </pre>
+
+        <hr>
+        <h3 id="html">HTML</h3>
+        <img src="HTML.png" alt="HTML image" width="150">
+        <pre>
+            &lt;html&gt;
+            &lt;head&gt;
+            &lt;title&gt;Hello&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            Hello World!
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+
+
+    <h1>Part 3: Universities and Policies Services</h1>
+
+    <div class="content">
+        <h2>Plagiarism</h2>
+        <p>
+            Plagiarism is a serious offence.<br>
+            Students found guilty of plagiarism may receive zero for the entire assignment.<br>
+            Plagiarism may also result in disciplinary action being taken by the University.<br>
+            Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/" target="_blank">here</a>
+            to read more about plagiarism.
+        </p>
+
+        <h2>Academic Consideration</h2>
+        <p>
+            We know that life isn't perfect and there may be a time<br>
+            when you can't hand in an assignment on time, or make it to class or an exam.<br>
+            If you find yourself in a situation like this, you may be eligible for Academic Consideration.<br>
+            Academic Consideration is designed to help students when they are sick, injured, or where a serious,<br>
+            unplanned situation has occurred that has affected their ability to study.<br>
+            Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/" target="_blank">here</a>
+            to read more about Academic Consideration.
+        </p>
+
+        <h2>Student Support Advisory</h2>
+        <p>
+            If you have an issue or a problem that is affecting your study,<br>
+            then the Student Support Advisers may be able to help.<br>
+            There are Student Support Advisers available to assist students<br>
+            who are studying at all UOW Campuses and in all UOW Faculties.<br>
+            Please click <a href="https://www.uow.edu.au/student/support-services/" target="_blank">here</a>
+            to read more about Student Support Advisers.
+        </p>
+
+        <p>
+            Student Support Adviser contact details for Faculty of Engineering and Information Sciences:
+        </p>
+
+        <table class="advisor-table">
+            <tr>
+                <td>
+                    <strong>Ann-Maree Smith</strong><br>
+                    Bld 40:133, Wollongong Campus<br>
+                    (02) 4221 4714<br>
+                    Mon-Fri<br>
+                    ams@uow.edu.au
+                </td>
+                <td>
+                    <strong>Mitz Perez</strong><br>
+                    Bld 4:105, Wollongong Campus<br>
+                    (02) 4221 3833<br>
+                    Mon-Fri<br>
+                    mperez@uow.edu.au
+                </td>
+            </tr>
+        </table>
+
+        <h2>Disability Services</h2>
+        <p>
+            Disability Services provide advice and support for students with a disability<br>
+            or health condition. Our aim is to ensure students with a disability realise their full academic potential.<br>
+            We also provide support for those who are the primary carers for those with a medical condition or disability.<br>
+            Please click <a href="https://www.uow.edu.au/business-law/about/equity-diversity-inclusion/disability-resources/" target="_blank">here</a>
+            to read more about Disability Services.
+        </p>
+    </div>
+        </body>
+
+    </html>
+ 
