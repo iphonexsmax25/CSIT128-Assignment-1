@@ -26,4 +26,5 @@ This project is a simple static HTML webpage for **CSIT128**.
 - Keep all image files in the same folder as `HTML_CODE.html`.
 - No installation is needed.
 - No programming software is needed to run this project.
+- If you want to view the code, right-click `HTML_CODE.html` and open it with any IDE or code editor.
 
