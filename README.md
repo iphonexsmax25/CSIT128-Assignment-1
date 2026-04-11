@@ -1,7 +1,6 @@
 # CSIT128 Assignment 1
 
-This project is a simple static HTML webpage for **CSIT128**.
-
+This project is a simple static HTML webpage for **HTML Part 1**.
 ## Project Files
 
 - `HTML_CODE.html` – main webpage
