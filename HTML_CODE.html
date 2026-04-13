@@ -1,215 +1,544 @@
 <!DOCTYPE html>
-    <html =lang="en">
+    <html lang="en">
         <head>
-            <title>The three stooges</title> 
+            <title>A1-G5T05-1137906,1348243,1443094(Issac,George,Hans)</title> 
             <style>
-              table {
+            
+            /* Part 1 table layout */
+            table {
                 border-collapse: collapse;
-                width: 100%;
+                width: auto;
                 text-align: center;
             }
-
+            
+            /* Part 1 table cells */
             th, td {
                 border: 1px solid black;
                 padding: 10px;
             }
-
+            
+            /* Part 1 table header cells */
             th {
                 background-color: #b7c2cc;
                 font-weight: bold;
             }
-               body {
-            font-family: Arial;
-        }
-
-            h2 {
-                text-align: left;
+            
+            /* Body text format */
+            body {
+                font-family: 'Times New Roman';
             }
-
+            
+            /* Part 2 list style */
             ul {
                 list-style-type: disc;
                 padding-left: 20px;
             }
-
+            
+            /* Image formatting */
             img {
                 vertical-align: middle;
                 margin-right: 20px;
             }
-
+            
+            /* Part 2 code format */
             pre {
                 display: inline-block;
                 vertical-align: middle;
-                background-color: #f4f4f4;
-                padding: 10px;
             }
-                .content {
-                margin-left: 50px;
-                max-width: 760px;
+            
+            /* Part 3 format */
+             .content { 
+                margin-left: 0;
+                max-width: none;
             }
 
+            /* Part 3 heading format */
+            h2 {
+                text-align: left;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            /* Part 3 paragraph format */
+            .content p {
+                margin-top: 0;
+                margin-left: 35px;
+            }
+   
+            /* Part 3 contact table layout */
             .advisor-table {
-                margin-top: 10px;
-                border: 1px solid black;
+                margin-top: -10px;
                 width: 320px;
+                margin-left: 35px;
             }
-
+            
+            /* Part 3 contact table cells */
             .advisor-table td {
                 border: 1px solid black;
-                padding: 3px;
+                padding: 3px;   
                 vertical-align: top;
                 width: 160px;
                 font-size: 14px;
             }
+
+            /* Part 4 outer table */
+            .part4-table {
+                border-collapse: collapse;
+                border: 1px solid black;
+                width: auto;
+                margin-top: 10px;
+                
+            }
+
+            /* Part 4 table cells */
+            .part4-table td {
+                border: 1px solid black;
+                padding: 10px;
+                vertical-align: top;
+                text-align: left;
+            }
+
+            /* Part 4 form elements */
+            .part4-table input,
+            .part4-table textarea,
+            .part4-table select,
+            .part4-table button {
+                font-family: 'Times New Roman';
+                font-size: 14px;
+            }
+
+            /* Part 4 messages */
+            .error {
+                color: red;
+                margin-left: 8px;
+            }
+
+            .result {
+                margin-left: 8px;
+            }
+
             </style>
+
+            <script>
+                //Show current system date
+                function showDate() {
+                    var now = new Date();
+
+                    var months = ["January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"];
+
+                    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+                    var date = now.getDate();
+                    var month = months[now.getMonth()];
+                    var year = now.getFullYear();
+                    var day = days[now.getDay()];
+
+                    var hour = now.getHours();
+                    var minute = now.getMinutes();
+                    var ampm = "AM";
+
+                    if (hour >= 12) {
+                        ampm = "PM";
+                    }
+
+                    if (hour == 0) {
+                        hour = 12;
+                    }
+                    else if (hour > 12) {
+                        hour = hour - 12;
+                    }
+
+                    if (minute < 10) {
+                        minute = "0" + minute;
+                    }
+
+                    document.getElementById("currentDate").value =
+                        date + " " + month + " " + year + " " + day + " " + hour + ":" + minute + " " + ampm;
+                }
+
+                //Disable/enable toggle for replace box
+                function toggleReplace() {
+                    var findText = document.getElementById("findText").value;
+                    var replaceBox = document.getElementById("replaceText");
+
+                    if (findText == "") {
+                        replaceBox.disabled = true;
+                        replaceBox.value = "";
+                    }
+                    else {
+                        replaceBox.disabled = false;
+                    }
+                }
+
+                //Find and replace logic
+                function findReplace() {
+                    var ok1 = validateName();
+                    var ok2 = validateModule();
+                    var ok3 = validateMessage();
+
+                    if (!ok1 || !ok2 || !ok3) {
+                        return;
+                    }
+
+                    var message = document.getElementById("message");
+                    var findText = document.getElementById("findText").value;
+                    var replaceText = document.getElementById("replaceText").value;
+                    var result = document.getElementById("replaceResult");
+
+                    if (findText == "") {
+                        result.innerHTML = "0 replacement(s)";
+                        return;
+                    }
+
+                    var original = message.value;
+                    var count = 0;
+                    var start = 0;
+
+                    while (true) {
+                        var pos = original.indexOf(findText, start);
+                        if (pos == -1) {
+                            break;
+                        }
+                        count = count + 1;
+                        start = pos + findText.length;
+                    }
+
+                    message.value = original.split(findText).join(replaceText);
+                    result.innerHTML = count + " replacement(s)";
+                }
+
+                //Name validation
+                function validateName() {
+                    var name = document.getElementById("name").value;
+                    var pattern = /^[A-Za-z0-9 ]+$/;
+
+                    if (name.trim() == "") {
+                        document.getElementById("nameError").innerHTML = "Name cannot be empty";
+                        return false;
+                    }
+
+                    if (!pattern.test(name)) {
+                        document.getElementById("nameError").innerHTML = "Only letters, numbers and spaces allowed";
+                        return false;
+                    }
+
+                    document.getElementById("nameError").innerHTML = "";
+                    return true;
+                }
+
+                //Module code validation
+                function validateModule() {
+                    var module = document.getElementById("module").value;
+                    var pattern = /^[A-Z]{4}[4-8]{3}$/;
+
+                    if (module == "") {
+                        document.getElementById("moduleError").innerHTML = "";
+                        return true;
+                    }
+
+                    if (!pattern.test(module)) {
+                        document.getElementById("moduleError").innerHTML =
+                            "Must be 4 uppercase letters followed by 3 digits from 4 to 8";
+                        return false;
+                    }
+
+                    document.getElementById("moduleError").innerHTML = "";
+                    return true;
+                }
+
+                //Message validation
+                function validateMessage() {
+                    var message = document.getElementById("message").value;
+
+                    if (message.trim() == "") {
+                        document.getElementById("messageError").innerHTML = "Message cannot be empty";
+                        return false;
+                    }
+
+                    document.getElementById("messageError").innerHTML = "";
+                    return true;
+                }
+
+                //Translate messages
+                function translateMessage() {
+                    var ok1 = validateName();
+                    var ok2 = validateModule();
+                    var ok3 = validateMessage();
+
+                    if (!ok1 || !ok2 || !ok3) {
+                        return;
+                    }
+
+                    var sl = document.querySelector('input[name="sl"]:checked').value;
+                    var tl = document.getElementById("tl").value;
+                    var text = document.getElementById("message").value;
+
+                    window.open(
+                        "https://translate.google.com/?sl=" + sl + "&tl=" + tl + "&text=" + encodeURIComponent(text) + "&op=translate","_blank"
+                    );
+                }
+
+                //Reset all elements
+                function resetForm() {
+                    document.getElementById("name").value = "";
+                    document.getElementById("module").value = "";
+                    document.getElementById("message").value = "Hello 202604";
+                    document.getElementById("findText").value = "";
+                    document.getElementById("replaceText").value = "";
+                    document.getElementById("replaceText").disabled = true;
+                    document.getElementById("replaceResult").innerHTML = "";
+                    document.getElementById("nameError").innerHTML = "";
+                    document.getElementById("moduleError").innerHTML = "";
+                    document.getElementById("messageError").innerHTML = "";
+                    document.querySelector('input[name="sl"][value="en"]').checked = true;
+                    document.getElementById("tl").value = "zh-CN";
+                    showDate();
+                }
+
+                //Call showdate and toggle replace on website load
+                window.onload = function () {
+                    showDate();
+                    toggleReplace();
+                };
+            </script>
          
         </head>
         <body>
-                    <table>
-            <tr> 
-                <th colspan="3">CSIT128: Assignment 1 </th>
-                <th>Group G5T05</th>
-            </tr>
-            <tr>
-                <td rowspan="3">Student Number /<br>Name / Email</td>
-                <td>1137906</td>
-                <td>Issac Lim King Ming</td>
-                <td>ikml942@uowmail.edu.au</td>
-            </tr>
-            <tr>
-                <td>1348243</td>
-                <td>George Lee Jia Yun</td>
-                <td>gjyl328@uowmail.edu.au</td>
-            </tr>
-            <tr>
-                <td>1443094</td>
-                <td>Hans Christian Hardja</td>
-                <td>hch200@uowmail.edu.au</td>
-            </tr>
-        </table>
-        <h1>Part 2: Hello world in different languages</h1>
+            <!-- Group member list table (Part 1) -->
+            <h1>Part 1: Group member list</h1>  
+            <table>
+                <tr> 
+                    <th colspan="3">CSIT128: Assignment 1 </th>
+                    <th>Group G5T05</th>
+                </tr>
+                <tr>
+                    <td rowspan="3">Student Number /<br>Name / Email</td>
+                    <td>1137906</td>
+                    <td>Isaac Lim King Ming</td>
+                    <td>ikml942@uowmail.edu.au</td>
+                </tr>
+                <tr>
+                    <td>1348243</td>
+                    <td>George Lee Jia Yun</td>
+                    <td>gjyl328@uowmail.edu.au</td>
+                </tr>
+                <tr>
+                    <td>1443094</td>
+                    <td>Hans Christian Hardja</td>
+                    <td>hch200@uowmail.edu.au</td>
+                </tr>
+            </table>
 
-        <ul>
-            <li><a href="#cpp">C++</a></li>
-            <li><a href="#csharp">C#</a></li>
-            <li><a href="#python">Python</a></li>
-            <li><a href="#html">HTML</a></li>
-        </ul>
+            <!-- Part 2 | NOTE: do not indent code inside <pre>, because the spaces will be shown on the webpage-->
+            <h1>Part 2: Hello world in different languages</h1>
 
-        <hr>
+            <ul>
+                <li><a href="#cpp">C++</a></li>
+                <li><a href="#csharp">C#</a></li>
+                <li><a href="#python">Python</a></li>
+                <li><a href="#html">HTML</a></li>
+            </ul>
 
-        <h3 id="cpp">C++</h3>
-        <img src="CPP.jpg" alt="C++ image" width="150">
-        <pre>
-            #include &lt;iostream&gt;
+            <hr>
 
-            void main(  ) {
-                cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
-            }
-        </pre>
+            <h3 id="cpp">C++</h3>
+            <img src="CPP.jpg" alt="C++ image" width="150">
+            <pre>
+#include &lt;iostream&gt;
 
-        <hr>
-        <h3 id="csharp">C#</h3>
-        <img src="CS.png" alt="C# image" width="150">
-        <pre>
-            using System;
+void main(  ) {
+    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+    return 0;
+}
+            </pre>
 
-            class Program 
-            {
-                static void Main() 
-                {
-                    Console.WriteLine("Hello, World!");
-                }
-            }
-        </pre>
+            <hr>
+            <h3 id="csharp">C#</h3>
+            <img src="CS.png" alt="C# image" width="150">
+            <pre>
+using System;
 
-        <hr>
-        <h3 id="python">Python</h3>
-        <img src="python.jpg" alt="Python image" width="150">
-        <pre>
-            # Hello World Program in Python
-            print("Hello World!")
-        </pre>
+class Program 
+{
+    static void Main() 
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+            </pre>
 
-        <hr>
-        <h3 id="html">HTML</h3>
-        <img src="HTML.png" alt="HTML image" width="150">
-        <pre>
-            &lt;html&gt;
-            &lt;head&gt;
-            &lt;title&gt;Hello&lt;/title&gt;
-            &lt;/head&gt;
-            &lt;body&gt;
-            Hello World!
-            &lt;/body&gt;
-            &lt;/html&gt;
-        </pre>
+            <hr>
+            <h3 id="python">Python</h3>
+            <img src="python.jpg" alt="Python image" width="150">
+            <pre>
+# Hello World Program in Python
+print("Hello World!")
+            </pre>
 
+            <hr>
+            <h3 id="html">HTML</h3>
+            <img src="HTML.png" alt="HTML image" width="150">
+            <pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Hello World!
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
 
-    <h1>Part 3: Universities and Policies Services</h1>
+            <!-- Part 3 -->
+            <h1>Part 3: University policies and services</h1>
 
-    <div class="content">
-        <h2>Plagiarism</h2>
-        <p>
-            Plagiarism is a serious offence.<br>
-            Students found guilty of plagiarism may receive zero for the entire assignment.<br>
-            Plagiarism may also result in disciplinary action being taken by the University.<br>
-            Please click <a href="https://www.uow.edu.au/student/support-services/academic-skills/online-resources/referencing-and-citing/plagiarism/" target="_blank">here</a>
-            to read more about plagiarism.
-        </p>
+            <div class="content">
+                <h2>PLAGIARISM</h2>
+                <p>
+                    Plagiarism is a serious offence.
+                    If we suspect any work is copied, all students involved are likely to receive zero<br> for the entire assignment.
+                    Plagiarism may also result in disciplinary action being taken by the University.<br>
+                    Please click <a href="https://www.uow.edu.au/student/support-services/academic-skills/online-resources/referencing-and-citing/plagiarism/" target="_blank">here</a>
+                    to read more about plagiarism.
+                </p>
 
-        <h2>Academic Consideration</h2>
-        <p>
-            We know that life isn't perfect and there may be a time<br>
-            when you can't hand in an assignment on time, or make it to class or an exam.<br>
-            If you find yourself in a situation like this, you may be eligible for Academic Consideration.<br>
-            Academic Consideration is designed to help students when they are sick, injured, or where a serious,<br>
-            unplanned situation has occurred that has affected their ability to study.<br>
-            Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/" target="_blank">here</a>
-            to read more about Academic Consideration.
-        </p>
+                <h2>ACADEMIC CONSIDERATION</h2>
+                <p>
+                    We know that life isn't perfect and there may be a time when you can't hand in an assignment on time, or make it<br> to class or an exam.
+                    If you find yourself in a situation like this, you may be eligible for Academic Consideration.<br>
+                    Academic Consideration is designed to help students when they are sick, injured, or where a serious,
+                    unplanned<br> situation has occurred that has affected their ability to study.<br>
+                    Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/" target="_blank">here</a>
+                    to read more about Academic Consideration.
+                </p>
 
-        <h2>Student Support Advisory</h2>
-        <p>
-            If you have an issue or a problem that is affecting your study,<br>
-            then the Student Support Advisers may be able to help.<br>
-            There are Student Support Advisers available to assist students<br>
-            who are studying at all UOW Campuses and in all UOW Faculties.<br>
-            Please click <a href="https://www.uow.edu.au/student/support-services/coordinators/" target="_blank">here</a>
-            to read more about Student Support Advisers.
-        </p>
+                <h2>STUDENT SUPPORT ADVISORY</h2>
+                <p>
+                    If you have an issue or a problem that is affecting your study,
+                    then the Student Support Advisers may be able to<br> help.
+                    There are Student Support Advisers available to assist students
+                    who are studying at all UOW Campuses and<br> in all UOW Faculties.<br>
+                    Please click <a href="https://www.uow.edu.au/student/support-services/coordinators/" target="_blank">here</a>
+                    to read more about Student Support Advisers.
+                </p>
 
-        <p>
-            Student Support Adviser contact details for Faculty of Engineering and Information Sciences:
-        </p>
+                <p>
+                    Student Support Adviser contact details for Faculty of Engineering and Information Sciences:
+                </p>
+                
+                <!--Contact details table-->
+                <table class="advisor-table">
+                    <tr>
+                        <td>
+                            <strong>Ann-Maree Smith</strong><br>
+                            Bld 40:133, Wollongong Campus<br>
+                            (02) 4221 4714<br>
+                            Mon-Fri<br>
+                            ams@uow.edu.au
+                        </td>
+                        <td>
+                            <strong>Mitz Perez</strong><br>
+                            Bld 4:105, Wollongong Campus<br>
+                            (02) 4221 3833<br>
+                            Mon-Fri<br>
+                            mperez@uow.edu.au
+                        </td>
+                    </tr>
+                </table>
 
-        <table class="advisor-table">
-            <tr>
-                <td>
-                    <strong>Ann-Maree Smith</strong><br>
-                    Bld 40:133, Wollongong Campus<br>
-                    (02) 4221 4714<br>
-                    Mon-Fri<br>
-                    ams@uow.edu.au
-                </td>
-                <td>
-                    <strong>Mitz Perez</strong><br>
-                    Bld 4:105, Wollongong Campus<br>
-                    (02) 4221 3833<br>
-                    Mon-Fri<br>
-                    mperez@uow.edu.au
-                </td>
-            </tr>
-        </table>
+                <h2>DISABILITY SERVICES</h2>
+                <p>
+                    Disability Services provide advice and support for students with a disability
+                    or health condition. Our aim is to<br> ensure students with a disability realise their full academic potential.
+                    We also provide support for those who are<br> the primary carers for those with a medical condition or disability.<br>
+                    Please click <a href="https://www.uow.edu.au/about/our-people/diversity-inclusion/people-with-lived-experience-of-disability/" target="_blank">here</a>
+                    to read more about Disability Services.
+                </p>
+            </div>
 
-        <h2>Disability Services</h2>
-        <p>
-            Disability Services provide advice and support for students with a disability<br>
-            or health condition. Our aim is to ensure students with a disability realise their full academic potential.<br>
-            We also provide support for those who are the primary carers for those with a medical condition or disability.<br>
-            Please click <a href="https://www.uow.edu.au/about/our-people/diversity-inclusion/people-with-lived-experience-of-disability/" target="_blank">here</a>
-            to read more about Disability Services.
-        </p>
-    </div>
+            <br>
+            <table class="part4-table">
+                
+                <!--Title cell-->
+                <tr>
+                    <td>
+                        Part 4
+                    </td>
+                </tr>
+
+                <!--Personal data cell-->
+                <tr>
+                    <td>
+                        Name:
+                        <input type="text" id="name">
+                        <span id="nameError" class="error"></span>
+
+                        <br><br>
+
+                        Module Code:
+                        <input type="text" id="module">
+                        <span id="moduleError" class="error"></span>
+
+                        <br><br>
+
+                        Current Date:
+                        <input type="text" id="currentDate" readonly>
+                    </td>
+                </tr>
+                
+                <!--Find and replace cell-->
+                <tr>
+                    <td>
+                        Message:
+                        <br>
+                        <textarea id="message" rows="4" cols="20">Hello 202604</textarea>
+                        <span id="messageError" class="error"></span>
+
+                        <br><br>
+
+                        Find:
+                        <input type="text" id="findText" onkeyup="toggleReplace()">
+
+                        <br><br>
+
+                        Replace:
+                        <input type="text" id="replaceText" disabled>
+
+                        <br><br>
+                        
+                        <!--Find and replace button-->
+                        <button type="button" onclick="findReplace()">Find and Replace</button>
+                        <span id="replaceResult" class="result"></span>
+                    </td>
+                </tr>
+
+                <!--Translate cell-->
+                <tr>
+                    <td>
+                        Source language:
+                        <input type="radio" name="sl" value="en" checked>English
+                        <input type="radio" name="sl" value="ms">Malay
+
+                        <br><br>
+
+                        Target language:
+                        <select id="tl">
+                            <option value="zh-CN" selected>Chinese</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ms">Malay</option>
+                            <option value="ko">Korean</option>
+                        </select>
+
+                        <br><br>
+                         
+                        <!--Translate and reset button-->
+                        <button type="button" onclick="translateMessage()">Translate</button>
+                        <button type="button" onclick="resetForm()">Reset</button>
+                    </td>
+                </tr>
+            </table>
+
         </body>
 
     </html>
