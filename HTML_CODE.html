@@ -260,23 +260,17 @@
                     return true;
                 }
 
-                //Translate messages
-                function translateMessage() {
+                //Validate translate
+                function validateTranslate() {
                     var ok1 = validateName();
                     var ok2 = validateModule();
                     var ok3 = validateMessage();
 
                     if (!ok1 || !ok2 || !ok3) {
-                        return;
+                        return false;
                     }
 
-                    var sl = document.querySelector('input[name="sl"]:checked').value;
-                    var tl = document.getElementById("tl").value;
-                    var text = document.getElementById("message").value;
-
-                    window.open(
-                        "https://translate.google.com/?sl=" + sl + "&tl=" + tl + "&text=" + encodeURIComponent(text) + "&op=translate","_blank"
-                    );
+                    return true
                 }
 
                 //Reset all elements
@@ -330,7 +324,7 @@
                 </tr>
             </table>
 
-            <!-- Part 2 | NOTE: do not indent code inside <pre>, because the spaces will be shown on the webpage-->
+            <!-- Part 2 -->
             <h1>Part 2: Hello world in different languages</h1>
 
             <ul>
@@ -458,87 +452,91 @@ Hello World!
             </div>
 
             <br>
-            <table class="part4-table">
-                
-                <!--Title cell-->
-                <tr>
-                    <td>
-                        Part 4
-                    </td>
-                </tr>
+            <!--Part 4-->
+            <form action="https://translate.google.com" method="get" target="_blank" onsubmit="return validateTranslate()">
 
-                <!--Personal data cell-->
-                <tr>
-                    <td>
-                        Name:
-                        <input type="text" id="name">
-                        <span id="nameError" class="error"></span>
+                <table class="part4-table">
+                                       
+                    <!--Title cell-->
+                    <tr>
+                        <td>
+                            Part 4
+                        </td>
+                    </tr>
 
-                        <br><br>
+                    <!--Personal data cell-->
+                    <tr>
+                        <td>
+                            Name:
+                            <input type="text" id="name">
+                            <span id="nameError" class="error"></span>
 
-                        Module Code:
-                        <input type="text" id="module">
-                        <span id="moduleError" class="error"></span>
+                            <br><br>
 
-                        <br><br>
+                            Module Code:
+                            <input type="text" id="module">
+                            <span id="moduleError" class="error"></span>
 
-                        Current Date:
-                        <input type="text" id="currentDate" readonly>
-                    </td>
-                </tr>
-                
-                <!--Find and replace cell-->
-                <tr>
-                    <td>
-                        Message:
-                        <br>
-                        <textarea id="message" rows="4" cols="20">Hello 202604</textarea>
-                        <span id="messageError" class="error"></span>
+                            <br><br>
 
-                        <br><br>
+                            Current Date:
+                            <input type="text" id="currentDate" readonly>
+                        </td>
+                    </tr>
+                    
+                    <!--Find and replace cell-->
+                    <tr>
+                        <td>
+                            Message:
+                            <br>
+                            <textarea id="message" name="text" rows="4" cols="20">Hello 202604</textarea>
+                            <span id="messageError" class="error"></span>
 
-                        Find:
-                        <input type="text" id="findText" onkeyup="toggleReplace()">
+                            <br><br>
 
-                        <br><br>
+                            Find:
+                            <input type="text" id="findText" onkeyup="toggleReplace()">
 
-                        Replace:
-                        <input type="text" id="replaceText" disabled>
+                            <br><br>
 
-                        <br><br>
-                        
-                        <!--Find and replace button-->
-                        <button type="button" onclick="findReplace()">Find and Replace</button>
-                        <span id="replaceResult" class="result"></span>
-                    </td>
-                </tr>
+                            Replace:
+                            <input type="text" id="replaceText" disabled>
 
-                <!--Translate cell-->
-                <tr>
-                    <td>
-                        Source language:
-                        <input type="radio" name="sl" value="en" checked>English
-                        <input type="radio" name="sl" value="ms">Malay
+                            <br><br>
+                            
+                            <!--Find and replace button-->
+                            <button type="button" onclick="findReplace()">Find and Replace</button>
+                            <span id="replaceResult" class="result"></span>
+                        </td>
+                    </tr>
 
-                        <br><br>
+                    <!--Translate cell-->
+                    <tr>
+                        <td>
+                            Source language:
+                            <input type="radio" name="sl" value="en" checked>English
+                            <input type="radio" name="sl" value="ms">Malay
 
-                        Target language:
-                        <select id="tl">
-                            <option value="zh-CN" selected>Chinese</option>
-                            <option value="ja">Japanese</option>
-                            <option value="ms">Malay</option>
-                            <option value="ko">Korean</option>
-                        </select>
+                            <br><br>
 
-                        <br><br>
-                         
-                        <!--Translate and reset button-->
-                        <button type="button" onclick="translateMessage()">Translate</button>
-                        <button type="button" onclick="resetForm()">Reset</button>
-                    </td>
-                </tr>
-            </table>
+                            Target language:
+                            <select id="tl" name="tl">
+                                <option value="zh-CN" selected>Chinese</option>
+                                <option value="ja">Japanese</option>
+                                <option value="ms">Malay</option>
+                                <option value="ko">Korean</option>
+                            </select>
 
+                            <br><br>
+                            
+                            <!--Translate and reset button-->
+                            <button type="submit">Translate</button>
+                            <button type="button" onclick="resetForm()">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            
         </body>
 
     </html>
